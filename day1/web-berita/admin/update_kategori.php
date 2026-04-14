@@ -14,7 +14,13 @@ $d = mysqli_fetch_assoc($data);
 </form>
 
 <?php
-    if (isset($_POST[''])) {
-        
+    if (isset($_POST['update'])) {
+        $nama = $_POST['nama'];
+
+        mysqli_query($con,"
+        update ketegori set nama='$nama' where id='$id'
+        ");
+
+        header("Location: kategori.php");
     }
 ?>
