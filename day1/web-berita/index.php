@@ -12,7 +12,7 @@ while ($row = mysqli_fetch_assoc($query)) {
     ?>
     <h3><?= $row['judul'] ?></h3>
     <p><?= substr($row['isi'],0,100) ?>...</p>
-    <a href="detail.php?id<?= $row['id'] ?>">baca</a>
+    <a href="detail.php?id=<?= $row['id'] ?>">baca</a>
     <hr>
 <?php
 } ?>

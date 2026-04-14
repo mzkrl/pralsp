@@ -1,8 +1,8 @@
 <?php
 include("../config/conn.php");
-$id=$_GET['id'];
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
-$data=mysqli_fetch_assoc(mysqli_query($conn,"
+$data=mysqli_fetch_assoc(mysqli_query($con,"
     select * from berita where id=$id
     "));
 ?>
@@ -15,11 +15,16 @@ $data=mysqli_fetch_assoc(mysqli_query($conn,"
 
 <?php
 if(isset($_POST['update'])){
-    mysqli_query($conn,"
+    $judul = mysqli_real_escape_string($con, $_POST['judul']);
+    $isi = mysqli_real_escape_string($con, $_POST['isi']);
+
+    mysqli_query($con,"
     update berita set 
-    judul='$_POST[judul]',
-    isi='$_POST[isi]'
+    judul='$judul',
+    isi='$isi'
     where id=$id
     ");
+    header("Location: berita.php");
+    exit;
 }
 ?>

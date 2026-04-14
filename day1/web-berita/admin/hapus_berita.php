@@ -1,7 +1,7 @@
 <?php
 include("../config/conn.php");
 
-$id= $_GET['id'];
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 mysqli_query($con,"
     delete from berita where id=$id
 ");

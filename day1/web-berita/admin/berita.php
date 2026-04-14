@@ -23,8 +23,8 @@
                 <td><?= $row['nama_kategori'] ?></td>
 
                 <td>
-                    <a href="edit_berita.php?id<?= $row['id'] ?>">edit</a>
-                    <a href="hapus_berita.php?id<?= $row['id'] ?>">hapus</a>
+                    <a href="edit_berita.php?id=<?= $row['id'] ?>">edit</a>
+                    <a href="hapus_berita.php?id=<?= $row['id'] ?>">hapus</a>
                 </td>
             </tr>
         <?php } 
