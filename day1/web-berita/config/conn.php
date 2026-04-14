@@ -1,12 +1,24 @@
 <?php
 
-$user="user";
-$host="127.0.0.1";
-$password="";
-$d="berita";
+$host = "localhost"; # getenv('DB_HOST');
+$user = "root"; #getenv('DB_USER');
+$password = "" ;#getenv('DB_PASSWORD');
+$d = "berita";#getenv('DB_NAME');
 
-    $con = new mysqli($host,$user,$password,$d);
-if ($con->connect_error) {
-    die("die". $con->connect_error);
+if ($host === false || $user === false || $d === false) {
+    die("Database configuration is not set.");
 }
+
+if ($password === false) {
+    $password = "";
+}
+
+$con = new mysqli($host, $user, $password, $d);
+try {
+    if ($con->connect_error) {
+        throw new Exception("Connection failed: " . $con->connect_error);
+    }
+} catch (Exception $e) {
+    die($e->getMessage());
+}   
 ?>
