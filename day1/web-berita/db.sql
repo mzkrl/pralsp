@@ -1,19 +1,19 @@
-create DATABASE berita;
+create DATABASE if NOT EXISTS  berita;
 use berita;
-CREATE Table user(
-    id INT auto_inrement PRIMARY KEY,
+CREATE Table  if NOT EXISTS user(
+    id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
     password VARCHAR(255)
 );
 
 insert into user VALUES(1, "user" ,"1234");
 
-CREATE Table kategori (
+CREATE Table if NOT EXISTS  kategori (
     id INT auto_increment PRIMARY KEY,
     nama_kategori VARCHAR(255)
 );
 
-CREATE Table berita (
+CREATE Table if NOT EXISTS berita (
     id INT AUTO_INCREMENT PRIMARY KEY,
     judul VARCHAR(255),
     isi TEXT,
