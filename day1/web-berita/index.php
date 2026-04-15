@@ -17,7 +17,7 @@ include("config/conn.php");
         <div class="cards-container">
             <h3 class="flex"><?= $row['judul'] ?></h3>
             <p><?= substr($row['isi'],0,100) ?>...</p>
-            <a href="detail.php?title=<?= rawurlencode(str_replace(' ', '-', $row['judul'])) ?>&amp;id=<?= rawurlencode($row['id']) ?>">baca</a>
+            <a href="detail.php?title=<?=rawurlencode(strtolower(str_replace(' ', '-', $row['judul']))) ?>&amp;id=<?= rawurlencode($row['id']) ?>">baca</a>
             <hr>
         </div>
         
