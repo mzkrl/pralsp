@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
 <form method="post">
     <input type="text" name="nama" id="">
     <button name="simpan">simpan</button>

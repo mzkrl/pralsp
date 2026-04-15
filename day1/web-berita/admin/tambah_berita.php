@@ -1,4 +1,7 @@
 <?php include("../config/conn.php"); ?>
+<head>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
 <form method="post">
     Judul = <input type="text" name="judul"><br>
     Isi = <textarea name="isi" ></textarea><br>

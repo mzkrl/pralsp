@@ -7,7 +7,9 @@ $data = mysqli_query($con,
 $d = mysqli_fetch_assoc($data);
 
 ?>
-
+<head>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
 <form action="" method="post">
     <input type="text" name="nama" value="<?= $d['nama_kategori'] ?>">
     <button name="update">update</button>

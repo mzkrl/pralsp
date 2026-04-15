@@ -6,7 +6,7 @@ CREATE Table  if NOT EXISTS user(
     password VARCHAR(255)
 );
 
-insert into user VALUES(1, "user" ,"1234");
+insert into user (username, password) VALUES('admin', MD5('1234'));
 
 CREATE Table if NOT EXISTS  kategori (
     id INT auto_increment PRIMARY KEY,

@@ -6,7 +6,9 @@ $data=mysqli_fetch_assoc(mysqli_query($con,"
     select * from berita where id=$id
     "));
 ?>
-
+<head>
+   <link rel="stylesheet" href="../assets/styles.css">
+</head>
 <form action="" method="post">
     Judul = <input type="text" name="judul" id="" value="<?= $data['judul'] ?>"><br>
     Isi = <textarea name="isi" id=""> <?= $data['isi'] ?> </textarea><br>

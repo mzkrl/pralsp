@@ -1,4 +1,7 @@
 <?php include("../config/conn.php");?>
+<head>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
 <h2>data berita</h2>
 <a href="tambah_berita.php">tambah berita</a>
 <table border="1" cellpadding="10" cellspacing="0">
@@ -12,7 +15,7 @@
     <?php
         $no = 1;
         $query = mysqli_query($con,"
-        select berita.*, kategori.nama_kategori from berita
+        select berita.id, berita.judul, kategori.nama_kategori from berita
         join kategori on berita.kategori_id = kategori.id");
 
         while ($row = mysqli_fetch_assoc($query)) {

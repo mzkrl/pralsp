@@ -1,5 +1,8 @@
 <?php include '../config/conn.php';
 ?>
+<head>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
 <h2>kategori</h2>
 <a href="tambah_kategori.php">tambah kategori</a>
 
