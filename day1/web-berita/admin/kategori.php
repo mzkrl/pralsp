@@ -13,8 +13,6 @@
         <th>Aksi</th>
     </tr>
 
-
-    
     <?php 
     $query = mysqli_query($con, "SELECT * FROM kategori");
     while ($row = mysqli_fetch_assoc($query)) {
@@ -22,7 +20,7 @@
         <tr>
             <td><?= $row['id'] ?></td>
             <td><?= $row['nama_kategori'] ?></td>
-            <td><a href="hapus_kategori.php?id=<?=$row['id']?>">hapus</a></td>
+            <td><a href="hapus_kategori.php?id=<?=$row['id']?>">hapus</a> <a href="edit_kategori.php?id=<?=$row['id']?>">edit</a></td>
         </tr>
     <?php } ?>
 </table>

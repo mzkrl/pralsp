@@ -24,5 +24,5 @@ include("config/conn.php");
     <?php
     } ?>
 
-    <footer><?= include("components/footer.php") ?></footer>
+    <?php include 'components/footer.html'; ?>
 </body>

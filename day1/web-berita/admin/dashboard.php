@@ -12,3 +12,4 @@ if (!isset($_SESSION['login'])) {
 <a href="berita.php">berita</a>
 <a href="kategori.php">kategori</a>
 <a href="../auth/logout.php">logout</a>
+    <?php include 'components/footer.html'; ?>
