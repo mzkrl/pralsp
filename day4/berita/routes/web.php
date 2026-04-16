@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\c_berita;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/berita', [c_berita::class, 'index']);
+Route::get('/berita/create', [c_berita::class, 'create']);
+Route::post('/berita/store', [c_berita::class, 'store']);
+Route::get('/berita/delete/{id}', [c_berita::class, 'delete']);
