@@ -1,7 +1,3 @@
-<!-- <head>
-    @vite('resources/css/app.css')
-</head> -->
-
 <main class="bg-gray-300">
     <x-navbar></x-navbar>
     @if (session('login') )
