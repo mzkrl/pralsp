@@ -1,8 +1,8 @@
 <?php
 
-$host = "localhost"; # getenv('DB_HOST');
+$host = "127.0.0.1"; # getenv('DB_HOST');
 $user = "root"; #getenv('DB_USER');
-$password = "" ;#getenv('DB_PASSWORD');
+$password = "root" ;#getenv('DB_PASSWORD');
 $d = "berita";#getenv('DB_NAME');
 
 if ($host === false || $user === false || $d === false) {

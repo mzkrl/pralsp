@@ -6,8 +6,6 @@ CREATE Table  if NOT EXISTS user(
     password VARCHAR(255)
 );
 
-insert into user (username, password) VALUES('admin', MD5('1234'));
-
 CREATE Table if NOT EXISTS  kategori (
     id INT auto_increment PRIMARY KEY,
     nama_kategori VARCHAR(255)
@@ -20,3 +18,4 @@ CREATE Table if NOT EXISTS berita (
     kategori_id INT,
     tanggal DATE
 )
+insert into user (username, password) VALUES('admin', MD5('1234'));

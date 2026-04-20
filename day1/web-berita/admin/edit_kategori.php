@@ -3,7 +3,7 @@ include("../config/conn.php");
 
 $id = isset($_GET["id"]) ? (int) $_GET["id"] : 0;
 $data = mysqli_query($con,
-            "select * from kategori where id = $id");
+    "select * from kategori where id = $id");
 $d = mysqli_fetch_assoc($data);
 
 if (isset($_POST['update'])) {

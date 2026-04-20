@@ -17,6 +17,7 @@ return new class extends Migration
         $table->string("judul");
         $table->text("isi");
         $table->timestamps();
+        $table->string("author")->references("name")->on("users")->onDelete("cascade");
         });
     }
 

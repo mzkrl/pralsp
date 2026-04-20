@@ -16,7 +16,11 @@ class c_berita extends Controller
         return view("berita.create");
     }
     public function store(Request $request){
-        $berita=berita::create($request->all());
+        $berita=berita::create([
+            'judul'=>$request->judul,
+            'isi'=>$request->isi,
+            'author'=>session('name'),
+        ]);
         return redirect("/berita");
     }
     public function delete($id){
