@@ -31,7 +31,7 @@ if (isset($_SESSION['username'])) {
 </head>
     <header class="site-header">
         <div class="site-header__container">
-            <h2 class="site-header__logo">medsos lsp</h2>
+            <a href="../index.php"><h2 class="site-header__logo">medsos lsp</h2></a>
             <!-- searchbar: redirect ke /index.php?search=$keyword -->
             <form class="site-header__search" method="get" action="<?= $basePath ?>/index.php">
                 <input type="text" name="search" placeholder="Search" value="<?= htmlspecialchars(isset($_GET['search']) ? trim($_GET['search']) : '', ENT_QUOTES, 'UTF-8') ?>">
