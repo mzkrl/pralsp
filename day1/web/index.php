@@ -1,12 +1,10 @@
 <?php
 include("config/conn.php");
 ?>
-<head>
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
+<?php require("components/header.html"); ?>
 <body>
     
-<h1>web berita</h1>
+<h1 class="">web berita</h1>
     <?php 
     $query = mysqli_query($con,"
     select * from berita
@@ -23,6 +21,5 @@ include("config/conn.php");
         
     <?php
     } ?>
-
     <?php include 'components/footer.html'; ?>
 </body>
