@@ -21,4 +21,22 @@ try {
 } catch (Exception $e) {
     die($e->getMessage());
 }   
+
+
+//reusable component search, nanti taro di navbar, langsung redirect ke /index.php?search=keyword
+class Search {
+    private $conn;
+
+    public function __construct($con) {
+        $this->conn = $con;
+    }
+
+    public function cari($keyword) {
+        $keyword = $this->conn->real_escape_string($keyword);
+        $query = "SELECT * FROM berita WHERE judul LIKE '%$keyword%' OR isi LIKE '%$keyword%'";
+        $result = $this->conn->query($query);
+
+        return $result;
+    }
+}
 ?>

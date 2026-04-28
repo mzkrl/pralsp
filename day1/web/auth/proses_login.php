@@ -12,7 +12,8 @@ $data = mysqli_fetch_assoc($query);
 
 if($data) {
     $_SESSION['login'] = true;
-    header("Location: ../admin/dashboard.php");
+    $_SESSION['username'] = $data['username'];
+    header("Location: ../user/dashboard.php");
     exit;
 }else{
     echo "login gagal";

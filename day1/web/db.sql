@@ -3,7 +3,8 @@ use berita;
 CREATE Table  if NOT EXISTS user(
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50),
-    password VARCHAR(255)
+    password VARCHAR(255),
+    gambar BLOB DEFAULT NULL
 );
 
 CREATE Table if NOT EXISTS  kategori (
@@ -16,6 +17,7 @@ CREATE Table if NOT EXISTS berita (
     judul VARCHAR(255),
     isi TEXT,
     kategori_id INT,
-    tanggal DATE
-)
+    tanggal DATE,
+    gambar BLOB DEFAULT NULL
+);
 insert into user (username, password) VALUES('admin', MD5('1234'));

@@ -1,6 +1,8 @@
 <head>
     <link rel="stylesheet" href="../assets/styles.css">
 </head>
+<?php include '../components/header.php'; ?>
+
 <form method="post">
     <input type="text" name="nama" id="">
     <button name="simpan">simpan</button>
@@ -15,3 +17,4 @@ if (isset($_POST['simpan'])){
         header("Location: kategori.php");
 }
 ?>
+<?php include '../components/footer.php'; ?>

@@ -1,4 +1,4 @@
-<footer style="margin-top: 40px; text-align: center; padding: 24px; border-top: 1px solid #ddd; background: #fff; border-radius: 8px;">
+<footer style="margin-top: auto; text-align: center; padding: 24px; border-top: 1px solid #ddd; background: #fff; border-radius: 8px;">
     <h4 style="margin-bottom: 12px; color: var(--primary-text-color);">quick nav</h4>
     <div id="footer-links" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
         <!-- Links dynamically inserted by JS -->
@@ -10,16 +10,16 @@
         var links = [
             { name: "Beranda (Home)", path: "/index.php" },
             { name: "Login", path: "/auth/login.php" },
-            { name: "Dashboard Admin", path: "/admin/dashboard.php" },
-            { name: "Kelola Berita", path: "/admin/berita.php" },
-            { name: "Tambah Berita", path: "/admin/tambah_berita.php" },
-            { name: "Kelola Kategori", path: "/admin/kategori.php" },
-            { name: "Tambah Kategori", path: "/admin/tambah_kategori.php" },
+            { name: "Dashboard user", path: "/user/dashboard.php" },
+            { name: "Kelola Post", path: "/user/upload.php" },
+            { name: "Posting", path: "/user/posting.php" },
+            { name: "Kelola Kategori", path: "/user/kategori.php" },
+            { name: "Tambah Kategori", path: "/user/tambah_kategori.php" },
             { name: "Logout", path: "/auth/logout.php" }
         ];
 
         var pathParts = window.location.pathname.split("/");
-        var rootIndex = pathParts.indexOf("web-berita");
+        var rootIndex = pathParts.indexOf("web");
         var basePath = "";
         
         if (rootIndex !== -1) {

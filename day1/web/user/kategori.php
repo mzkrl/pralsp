@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="../assets/styles.css">
 </head>
+<?php include '../components/header.php'; ?>
 <h2>kategori</h2>
 <a href="tambah_kategori.php">tambah kategori</a>
 
@@ -24,3 +25,4 @@
         </tr>
     <?php } ?>
 </table>
+<?php include '../components/footer.php'; ?>

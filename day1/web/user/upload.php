@@ -2,8 +2,9 @@
 <head>
     <link rel="stylesheet" href="../assets/styles.css">
 </head>
-<h2>data berita</h2>
-<a href="tambah_berita.php">tambah berita</a>
+<?php include '../components/header.php'; ?>
+<h2>kelola post</h2>
+<a href="tambah_berita.php">Posting</a>
 <table border="1" cellpadding="10" cellspacing="0">
     <tr>
         <th>no</th>
@@ -33,4 +34,4 @@
         <?php } 
     ?>
 </table>
-<?php include '../components/footer.html'; ?>
+<?php include '../components/footer.php'; ?>
