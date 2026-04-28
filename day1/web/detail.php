@@ -59,7 +59,7 @@ if (isset($_POST['comment_submit']) && isset($_SESSION['login'])) {
 
 // JOIN dengan user untuk mendapatkan foto profil pemilik postingan
 $result = mysqli_query($con, "
-    select berita.*, user.username as user_username, user.gambar as user_gambar, user.gambar_type as user_gambar_type
+    select berita.*, user.id as uid, user.username as user_username, user.gambar as user_gambar, user.gambar_type as user_gambar_type
     from berita
     left join user on berita.user_id = user.id
     where berita.id=$id
@@ -95,7 +95,7 @@ $data = $result ? mysqli_fetch_assoc($result) : null;
                 <?php } ?>
             </div>
             <div class="detail-author__meta">
-                <span class="detail-author__name"><?= htmlspecialchars($postAuthor, ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="detail-author__name"><a href="view.php?id=<?= (int)$data['uid'] ?>"><?= htmlspecialchars($postAuthor, ENT_QUOTES, 'UTF-8') ?></a></span>
                 <span class="detail-author__date"><?= htmlspecialchars($data['tanggal'], ENT_QUOTES, 'UTF-8') ?></span>
             </div>
         </div>
@@ -122,7 +122,7 @@ $data = $result ? mysqli_fetch_assoc($result) : null;
     <?php
         // JOIN komentar dengan user untuk foto profil komentator
         $commentQuery = "
-            select komentar.*, user.gambar as user_gambar, user.gambar_type as user_gambar_type
+            select komentar.*, user.id as uid, user.gambar as user_gambar, user.gambar_type as user_gambar_type
             from komentar
             left join user on komentar.user_id = user.id
             where komentar.berita_id=$id" . $tagSql . " 
@@ -150,7 +150,7 @@ $data = $result ? mysqli_fetch_assoc($result) : null;
                         <img src="<?= $commentAvatarSrc ?>" alt="<?= htmlspecialchars($c['username'], ENT_QUOTES, 'UTF-8') ?>">
                     <?php } ?>
                 </div>
-                <span class="comment-item__name"><?= htmlspecialchars($c['username'], ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="comment-item__name"><a href="view.php?id=<?= (int)$c['uid'] ?>"><?= htmlspecialchars($c['username'], ENT_QUOTES, 'UTF-8') ?></a></span>
             </div>
             <p><?= htmlspecialchars($c['isi'], ENT_QUOTES, 'UTF-8') ?></p>
             <?php if ($commentImage) { ?>

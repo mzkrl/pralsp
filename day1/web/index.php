@@ -30,7 +30,7 @@ include("config/conn.php");
 
         // JOIN dengan tabel user untuk mendapatkan foto profil dan username uploader
         $query = mysqli_query($con,"
-        select berita.*, user.username as user_username, user.gambar as user_gambar, user.gambar_type as user_gambar_type
+        select berita.*, user.id as uid, user.username as user_username, user.gambar as user_gambar, user.gambar_type as user_gambar_type
         from berita
         left join user on berita.user_id = user.id" . $whereSql . " 
         order by berita.tanggal desc
@@ -64,7 +64,7 @@ include("config/conn.php");
                             <img src="<?= $avatarSrc ?>" alt="<?= htmlspecialchars($uploaderName, ENT_QUOTES, 'UTF-8') ?>">
                         <?php } ?>
                     </div>
-                    <span class="feed-item__username"><?= htmlspecialchars($uploaderName, ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="feed-item__username"><a href="view.php?id=<?= (int)$row['uid'] ?>"><?= htmlspecialchars($uploaderName, ENT_QUOTES, 'UTF-8') ?></a></span>
                 </div>
                 <a class="feed-item__link" href="detail.php?title=<?=rawurlencode(strtolower(str_replace(' ', '-', $row['judul']))) ?>&amp;id=<?= rawurlencode($row['id']) ?>">
                     <div class="feed-item__card">
@@ -82,7 +82,7 @@ include("config/conn.php");
 
     <!-- KOLOM KANAN: Sidebar -->
     <aside class="feed-sidebar">
-        <div class="sidebar-banner"></div>
+        <!-- <div class="sidebar-banner"></div> -->
         <form method="get" class="sidebar-filter">                                     <!-- untuk search/filter pake hashtag -->
             <input type="text" name="tag" placeholder="#hashtag" value="<?= htmlspecialchars(isset($_GET['tag']) ? trim($_GET['tag']) : '', ENT_QUOTES, 'UTF-8') ?>">
             <?php if (!empty($_GET['search'])) { ?>
