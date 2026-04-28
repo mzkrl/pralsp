@@ -52,30 +52,31 @@ if(isset($_POST["simpan"])){
     }
 }
 ?>
-<head>
-    <link rel="stylesheet" href="../assets/styles.css">
-</head>
 <?php include '../components/header.php'; ?>
-<form method="post" enctype="multipart/form-data">
+<body>
+<form class="form-card" method="post" enctype="multipart/form-data">
+    <h2>Posting Baru</h2>
     <?php if ($error) { ?>
-        <div><?= $error ?></div>
+        <div class="alert-error"><?= $error ?></div>
     <?php } ?>
-    Judul <input type="text" name="judul" maxlength="250"><br>
-    Isi <textarea name="isi" maxlength="250"></textarea><br>
-
-    <select name="kategori" >
+    <label>Judul</label>
+    <input type="text" name="judul" maxlength="250">
+    <label>Isi</label>
+    <textarea name="isi" maxlength="250"></textarea>
+    <label>Kategori</label>
+    <select name="kategori">
         <?php
-            $kat=mysqli_query($con,"
-            select * from kategori
-            ");
-
+            $kat=mysqli_query($con,"select * from kategori");
             while($k=mysqli_fetch_assoc($kat)){
                 echo "<option value='{$k['id']}'>{$k['nama_kategori']}</option>";
             };
         ?>
     </select>
-    Gambar <input type="file" name="gambar" accept="image/*"><br>
-    File <input type="file" name="file"><br>
+    <label>Gambar</label>
+    <input type="file" name="gambar" accept="image/*">
+    <label>File</label>
+    <input type="file" name="file">
     <button name="simpan">simpan</button>
 </form>
 <?php include '../components/footer.php'; ?>
+</body>

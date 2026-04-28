@@ -17,17 +17,7 @@ if (!$data) {
     echo "data tidak ditemukan";
     exit;
 }
-?>
-<head>
-   <link rel="stylesheet" href="../assets/styles.css">
-</head>
-<form action="" method="post">
-    Judul = <input type="text" name="judul" id="" value="<?= $data['judul'] ?>" maxlength="250"><br>
-    Isi = <textarea name="isi" id="" maxlength="250"> <?= $data['isi'] ?> </textarea><br>
-    <button name="update">update</button>
-</form>
 
-<?php
 if(isset($_POST['update'])){
     $judul = mysqli_real_escape_string($con, $_POST['judul']);
     $isi = mysqli_real_escape_string($con, $_POST['isi']);
@@ -47,3 +37,15 @@ if(isset($_POST['update'])){
     exit;
 }
 ?>
+<?php include '../components/header.php'; ?>
+<body>
+<form class="form-card" action="" method="post">
+    <h2>Edit Post</h2>
+    <label>Judul</label>
+    <input type="text" name="judul" value="<?= htmlspecialchars($data['judul'], ENT_QUOTES, 'UTF-8') ?>" maxlength="250">
+    <label>Isi</label>
+    <textarea name="isi" maxlength="250"><?= htmlspecialchars($data['isi'], ENT_QUOTES, 'UTF-8') ?></textarea>
+    <button name="update">update</button>
+</form>
+<?php include '../components/footer.php'; ?>
+</body>

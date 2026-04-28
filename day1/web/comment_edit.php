@@ -28,15 +28,16 @@ if (isset($_POST['update'])) {
     }
 }
 ?>
-<head>
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
 <?php include 'components/header.php'; ?>
-<form method="post">
+<body>
+<form class="form-card" method="post">
+    <h2>Edit Komentar</h2>
     <?php if ($error) { ?>
-        <div><?= $error ?></div>
+        <div class="alert-error"><?= $error ?></div>
     <?php } ?>
-    Komentar <textarea name="isi" maxlength="250"><?= htmlspecialchars($comment['isi'], ENT_QUOTES, 'UTF-8') ?></textarea><br>
+    <label>Komentar</label>
+    <textarea name="isi" maxlength="250"><?= htmlspecialchars($comment['isi'], ENT_QUOTES, 'UTF-8') ?></textarea>
     <button name="update">update</button>
 </form>
 <?php include 'components/footer.php'; ?>
+</body>

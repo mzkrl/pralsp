@@ -39,20 +39,19 @@ if (isset($_POST['save'])) {
 
 }
 ?>
-<head>
-    <link rel="stylesheet" href="../assets/styles.css">
-</head>
 <?php include '../components/header.php'; ?>
 <body>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form class="form-card" action="" method="post" enctype="multipart/form-data">
         <?php if ($success) { ?>
-            <div><?= $success ?></div>
+            <div class="alert-success"><?= $success ?></div>
         <?php } ?>
         <?php if ($imageSrc) { ?>
-            <img src="<?= $imageSrc ?>" alt="Foto profil" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover;">
+            <img class="form-card__profile-img" src="<?= $imageSrc ?>" alt="Foto profil">
         <?php } ?>
-        Bio <textarea name="bio" maxlength="250"><?= htmlspecialchars($bio, ENT_QUOTES, 'UTF-8') ?></textarea><br>
-        Foto Profil <input type="file" name="gambar" accept="image/*"><br>
+        <label>Bio</label>
+        <textarea name="bio" maxlength="250"><?= htmlspecialchars($bio, ENT_QUOTES, 'UTF-8') ?></textarea>
+        <label>Foto Profil</label>
+        <input type="file" name="gambar" accept="image/*">
         <button name="save">simpan</button>
     </form> 
 

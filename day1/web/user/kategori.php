@@ -1,28 +1,29 @@
-<?php include '../config/conn.php';
-?>
-<head>
-    <link rel="stylesheet" href="../assets/styles.css">
-</head>
+<?php include '../config/conn.php'; ?>
 <?php include '../components/header.php'; ?>
-<h2>kategori</h2>
-<a href="tambah_kategori.php">tambah kategori</a>
-
-<table border="1" cellpadding="10" cellspacing="0">
-    <tr>
-        <th>ID</th>
-        <th>Nama Kategori</th>
-        <th>Aksi</th>
-    </tr>
-
-    <?php 
-    $query = mysqli_query($con, "SELECT * FROM kategori");
-    while ($row = mysqli_fetch_assoc($query)) {
-    ?>
+<body>
+<div class="admin-page">
+    <h2>kategori</h2>
+    <a href="tambah_kategori.php">+ Tambah Kategori</a>
+    <table class="data-table">
         <tr>
-            <td><?= $row['id'] ?></td>
-            <td><?= $row['nama_kategori'] ?></td>
-            <td><a href="hapus_kategori.php?id=<?=$row['id']?>">hapus</a> <a href="edit_kategori.php?id=<?=$row['id']?>">edit</a></td>
+            <th>ID</th>
+            <th>Nama Kategori</th>
+            <th>Aksi</th>
         </tr>
-    <?php } ?>
-</table>
+        <?php 
+        $query = mysqli_query($con, "SELECT * FROM kategori");
+        while ($row = mysqli_fetch_assoc($query)) {
+        ?>
+            <tr>
+                <td><?= $row['id'] ?></td>
+                <td><?= htmlspecialchars($row['nama_kategori'], ENT_QUOTES, 'UTF-8') ?></td>
+                <td>
+                    <a href="edit_kategori.php?id=<?=$row['id']?>">edit</a>
+                    <a href="hapus_kategori.php?id=<?=$row['id']?>">hapus</a>
+                </td>
+            </tr>
+        <?php } ?>
+    </table>
+</div>
 <?php include '../components/footer.php'; ?>
+</body>

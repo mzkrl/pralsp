@@ -5,12 +5,13 @@ if (!isset($_SESSION['login'])) {
     exit;
 }
 ?>
-<head>
-    <link rel="stylesheet" href="../assets/styles.css">
-</head>
 <?php include '../components/header.php'; ?>
-<h2>dashboard</h2>
-<a href="berita.php">berita</a>
-<a href="kategori.php">kategori</a>
-<a href="../auth/logout.php">logout</a>
+<body>
+<div class="admin-page">
+    <h2>dashboard</h2>
+    <a href="upload.php">Kelola Post</a>
+    <a href="kategori.php">Kategori</a>
+    <a href="../auth/logout.php">Logout</a>
+</div>
 <?php include '../components/footer.php'; ?>
+</body>

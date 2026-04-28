@@ -66,13 +66,11 @@ $result = mysqli_query($con, "
 ");
 $data = $result ? mysqli_fetch_assoc($result) : null;
 ?>
-<head>
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
 <?php include 'components/header.php'; ?>
 <body>
+<div class="detail-page">
     <?php if (!$data) { ?>
-        <div>Post tidak ditemukan.</div>
+        <div class="empty-state">Post tidak ditemukan.</div>
     <?php } else { ?>
         <?php
         $imageSrc = '';
@@ -90,35 +88,37 @@ $data = $result ? mysqli_fetch_assoc($result) : null;
         $postAuthor = !empty($data['user_username']) ? $data['user_username'] : $data['uploader'];
         ?>
         <!-- Info pemilik postingan -->
-        <div class="post-author-info">
-            <?php if ($postAvatarSrc) { ?>
-                <img class="post-author-avatar" src="<?= $postAvatarSrc ?>" alt="<?= htmlspecialchars($postAuthor, ENT_QUOTES, 'UTF-8') ?>">
-            <?php } else { ?>
-                <div class="post-author-avatar post-author-avatar-placeholder"></div>
-            <?php } ?>
-            <div class="post-author-meta">
-                <span class="post-author-name"><?= htmlspecialchars($postAuthor, ENT_QUOTES, 'UTF-8') ?></span>
-                <span class="post-author-date"><?= htmlspecialchars($data['tanggal'], ENT_QUOTES, 'UTF-8') ?></span>
+        <div class="detail-author">
+            <div class="detail-author__avatar">
+                <?php if ($postAvatarSrc) { ?>
+                    <img src="<?= $postAvatarSrc ?>" alt="<?= htmlspecialchars($postAuthor, ENT_QUOTES, 'UTF-8') ?>">
+                <?php } ?>
+            </div>
+            <div class="detail-author__meta">
+                <span class="detail-author__name"><?= htmlspecialchars($postAuthor, ENT_QUOTES, 'UTF-8') ?></span>
+                <span class="detail-author__date"><?= htmlspecialchars($data['tanggal'], ENT_QUOTES, 'UTF-8') ?></span>
             </div>
         </div>
 
-        <h2><?= htmlspecialchars($data["judul"], ENT_QUOTES, 'UTF-8') ?></h2>
+        <h2 class="detail-post__title"><?= htmlspecialchars($data["judul"], ENT_QUOTES, 'UTF-8') ?></h2>
         <?php if ($imageSrc) { ?>
-            <img class="feed-post-image" src="<?= $imageSrc ?>" alt="<?= htmlspecialchars($data['judul'], ENT_QUOTES, 'UTF-8') ?>">
+            <img class="detail-post__image" src="<?= $imageSrc ?>" alt="<?= htmlspecialchars($data['judul'], ENT_QUOTES, 'UTF-8') ?>">
         <?php } ?>
-        <p><?= htmlspecialchars($data["isi"], ENT_QUOTES, 'UTF-8') ?></p>
+        <div class="detail-post__content">
+            <p><?= htmlspecialchars($data["isi"], ENT_QUOTES, 'UTF-8') ?></p>
+        </div>
         <?php if (!empty($data['file_blob'])) { ?>
-            <a class="file-link" href="download.php?type=berita&id=<?= $id ?>">Download file: <?= htmlspecialchars($data['file_name'] ?: 'file', ENT_QUOTES, 'UTF-8') ?></a>
+            <a class="detail-file-link" href="download.php?type=berita&id=<?= $id ?>">Download file: <?= htmlspecialchars($data['file_name'] ?: 'file', ENT_QUOTES, 'UTF-8') ?></a>
         <?php } ?>
     <?php } ?>
 
-    <form method="get" class="feed-filter">
+    <form method="get" class="detail-filter">
         <input type="text" name="tag" placeholder="#hashtag" value="<?= htmlspecialchars($tag, ENT_QUOTES, 'UTF-8') ?>">
         <input type="hidden" name="id" value="<?= $id ?>">
         <button type="submit">Filter komentar</button>
     </form>
 
-    <h3>Komentar</h3>
+    <h3 class="comment-section__title">Komentar</h3>
     <?php
         // JOIN komentar dengan user untuk foto profil komentator
         $commentQuery = "
@@ -144,44 +144,49 @@ $data = $result ? mysqli_fetch_assoc($result) : null;
             }
     ?>
         <div class="comment-item">
-            <div class="comment-author-row">
-                <?php if ($commentAvatarSrc) { ?>
-                    <img class="comment-avatar" src="<?= $commentAvatarSrc ?>" alt="<?= htmlspecialchars($c['username'], ENT_QUOTES, 'UTF-8') ?>">
-                <?php } else { ?>
-                    <div class="comment-avatar comment-avatar-placeholder"></div>
-                <?php } ?>
-                <strong><?= htmlspecialchars($c['username'], ENT_QUOTES, 'UTF-8') ?></strong>
+            <div class="comment-item__header">
+                <div class="comment-item__avatar">
+                    <?php if ($commentAvatarSrc) { ?>
+                        <img src="<?= $commentAvatarSrc ?>" alt="<?= htmlspecialchars($c['username'], ENT_QUOTES, 'UTF-8') ?>">
+                    <?php } ?>
+                </div>
+                <span class="comment-item__name"><?= htmlspecialchars($c['username'], ENT_QUOTES, 'UTF-8') ?></span>
             </div>
             <p><?= htmlspecialchars($c['isi'], ENT_QUOTES, 'UTF-8') ?></p>
             <?php if ($commentImage) { ?>
-                <img class="feed-post-image" src="<?= $commentImage ?>" alt="Komentar image">
+                <img class="comment-item__image" src="<?= $commentImage ?>" alt="Komentar image">
             <?php } ?>
             <?php if (!empty($c['file_blob'])) { ?>
-                <a class="file-link" href="download.php?type=komentar&id=<?= $c['id'] ?>">Download file: <?= htmlspecialchars($c['file_name'] ?: 'file', ENT_QUOTES, 'UTF-8') ?></a>
+                <a class="detail-file-link" href="download.php?type=komentar&id=<?= $c['id'] ?>">Download: <?= htmlspecialchars($c['file_name'] ?: 'file', ENT_QUOTES, 'UTF-8') ?></a>
             <?php } ?>
             <?php if (isset($_SESSION['username']) && $_SESSION['username'] === $c['username']) { ?>
-                <div>
-                    <a class="file-link" href="comment_edit.php?id=<?= $c['id'] ?>&post_id=<?= $id ?>">edit</a>
-                    <a class="file-link" href="comment_delete.php?id=<?= $c['id'] ?>&post_id=<?= $id ?>">hapus</a>
+                <div class="comment-item__actions">
+                    <a href="comment_edit.php?id=<?= $c['id'] ?>&post_id=<?= $id ?>">edit</a>
+                    <a href="comment_delete.php?id=<?= $c['id'] ?>&post_id=<?= $id ?>">hapus</a>
                 </div>
             <?php } ?>
         </div>
     <?php } ?>
 
     <?php if (isset($_SESSION['login'])) { ?>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" class="comment-form">
             <?php if ($errorComment) { ?>
-                <div><?= $errorComment ?></div>
+                <div class="alert-error"><?= $errorComment ?></div>
             <?php } ?>
-            Komentar <textarea name="isi" maxlength="250"></textarea><br>
-            Gambar <input type="file" name="gambar" accept="image/*"><br>
-            File <input type="file" name="file"><br>
+            <label>Komentar</label>
+            <textarea name="isi" maxlength="250"></textarea>
+            <label>Gambar</label>
+            <input type="file" name="gambar" accept="image/*">
+            <label>File</label>
+            <input type="file" name="file">
             <button name="comment_submit">kirim</button>
         </form>
     <?php } else { ?>
-        <a class="file-link" href="auth/login.php">Login untuk komentar</a>
+        <a class="login-prompt" href="auth/login.php">Login untuk komentar</a>
     <?php } ?>
 
-    <a class="file-link" href="index.php">kembali</a>
+    <a class="back-link" href="index.php">← kembali</a>
+</div>
+
     <?php include 'components/footer.php'; ?>
 </body>

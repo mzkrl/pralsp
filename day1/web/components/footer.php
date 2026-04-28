@@ -1,6 +1,6 @@
-<footer style="margin-top: auto; text-align: center; padding: 24px; border-top: 1px solid #ddd; background: #fff; border-radius: 8px;">
-    <h4 style="margin-bottom: 12px; color: var(--primary-text-color);">quick nav</h4>
-    <div id="footer-links" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
+<footer class="site-footer">
+    <h4>quick nav</h4>
+    <div id="footer-links" class="site-footer__links">
         <!-- Links dynamically inserted by JS -->
     </div>
 </footer>

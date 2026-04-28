@@ -17,15 +17,12 @@ if (isset($_POST['update'])) {
     exit;
 }
 ?>
-<head>
-    <link rel="stylesheet" href="../assets/styles.css">
-    <title>Edit Kategori</title>
-</head>
-
-<form action="" method="post">
+<?php include '../components/header.php'; ?>
+<body>
+<form class="form-card" action="" method="post">
     <h2>Edit Kategori</h2>
     <input type="text" name="nama" value="<?= htmlspecialchars($d['nama_kategori']) ?>" required>
     <button name="update">Update</button>
 </form>
-
-<?php include '../components/footer.html'; ?>
+<?php include '../components/footer.php'; ?>
+</body>
