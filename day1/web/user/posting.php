@@ -30,7 +30,7 @@ if(isset($_POST["simpan"])){
             $gambarTypeSql = "'" . $gambarType . "'";
         }
 
-        $fileSql = "NULL";
+        $fileSql = "NULL";                                                                  //utk file
         $fileNameSql = "NULL";
         $fileTypeSql = "NULL";
         if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
