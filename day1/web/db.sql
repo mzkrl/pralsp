@@ -19,18 +19,22 @@ CREATE Table if NOT EXISTS berita (
     judul VARCHAR(255),
     isi VARCHAR(250),
     kategori_id INT,
+    user_id INT,
     uploader VARCHAR(50),
     tanggal DATETIME,
     gambar BLOB DEFAULT NULL,
     gambar_type VARCHAR(50),
     file_blob BLOB DEFAULT NULL,
     file_name VARCHAR(255),
-    file_type VARCHAR(100)
+    file_type VARCHAR(100),
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (kategori_id) REFERENCES kategori(id) ON DELETE SET NULL
 );
 
 CREATE Table if NOT EXISTS komentar (
     id INT AUTO_INCREMENT PRIMARY KEY,
     berita_id INT,
+    user_id INT,
     username VARCHAR(50),
     isi VARCHAR(250),
     tanggal DATETIME,
@@ -38,7 +42,9 @@ CREATE Table if NOT EXISTS komentar (
     gambar_type VARCHAR(50),
     file_blob BLOB DEFAULT NULL,
     file_name VARCHAR(255),
-    file_type VARCHAR(100)
+    file_type VARCHAR(100),
+    FOREIGN KEY (berita_id) REFERENCES berita(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
 insert into user (username, password) VALUES('admin', MD5('1234'));
 insert into user (username, password) VALUES('admin2', MD5('password'));

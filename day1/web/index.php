@@ -7,7 +7,6 @@ include("config/conn.php");
 <main class="feed-page">
     <div class="feed-divider"></div>
     <h1 class="feed-title">Feeds</h1>
-    <!-- <div style="justify-content: space-between; display: flex; align-items: center; margin-bottom: 20px;"> -->
     <?php 
     $tag = isset($_GET['tag']) ? trim($_GET['tag']) : '';
     $search = isset($_GET['search']) ? trim($_GET['search']) : '';
@@ -15,11 +14,11 @@ include("config/conn.php");
 
     if ($tag !== '') {
         $tagSafe = mysqli_real_escape_string($con, ltrim($tag, '#'));
-        $conditions[] = "(judul like '%#$tagSafe%' or isi like '%#$tagSafe%' or exists (select 1 from komentar k where k.berita_id = berita.id and k.isi like '%#$tagSafe%'))";
+        $conditions[] = "(berita.judul like '%#$tagSafe%' or berita.isi like '%#$tagSafe%' or exists (select 1 from komentar k where k.berita_id = berita.id and k.isi like '%#$tagSafe%'))";
     }
     if ($search !== '') {
         $searchSafe = mysqli_real_escape_string($con, $search);
-        $conditions[] = "(judul like '%$searchSafe%' or isi like '%$searchSafe%')";
+        $conditions[] = "(berita.judul like '%$searchSafe%' or berita.isi like '%$searchSafe%')";
     }
 
     $whereSql = '';
@@ -27,9 +26,12 @@ include("config/conn.php");
         $whereSql = " where " . implode(" and ", $conditions);
     }
 
+    // JOIN dengan tabel user untuk mendapatkan foto profil dan username uploader
     $query = mysqli_query($con,"
-    select * from berita" . $whereSql . " 
-    order by tanggal desc
+    select berita.*, user.username as user_username, user.gambar as user_gambar, user.gambar_type as user_gambar_type
+    from berita
+    left join user on berita.user_id = user.id" . $whereSql . " 
+    order by berita.tanggal desc
     ");
     if (mysqli_num_rows($query) === 0) {                                //if else kalo kosong
     ?>
@@ -42,9 +44,26 @@ include("config/conn.php");
             $mime = !empty($row['gambar_type']) ? $row['gambar_type'] : 'image/jpeg';
             $imageSrc = 'data:' . $mime . ';base64,' . base64_encode($row['gambar']);
         }
+
+        // Foto profil uploader
+        $avatarSrc = '';
+        if (!empty($row['user_gambar'])) {
+            $avatarMime = !empty($row['user_gambar_type']) ? $row['user_gambar_type'] : 'image/jpeg';
+            $avatarSrc = 'data:' . $avatarMime . ';base64,' . base64_encode($row['user_gambar']);
+        }
+
+        // Nama uploader: prioritaskan dari relasi user, fallback ke kolom uploader
+        $uploaderName = !empty($row['user_username']) ? $row['user_username'] : $row['uploader'];
         ?>
         <div class="feed-item">
-            <div class="feed-avatar"></div>
+            <div class="feed-avatar-wrapper">
+                <?php if ($avatarSrc) { ?>
+                    <img class="feed-avatar-img" src="<?= $avatarSrc ?>" alt="<?= htmlspecialchars($uploaderName, ENT_QUOTES, 'UTF-8') ?>">
+                <?php } else { ?>
+                    <div class="feed-avatar"></div>
+                <?php } ?>
+                <span class="feed-username"><?= htmlspecialchars($uploaderName, ENT_QUOTES, 'UTF-8') ?></span>
+            </div>
             <a class="feed-card-link" href="detail.php?title=<?=rawurlencode(strtolower(str_replace(' ', '-', $row['judul']))) ?>&amp;id=<?= rawurlencode($row['id']) ?>">
                 <div class="feed-card">
                     <?php if ($imageSrc) { ?>
@@ -64,7 +83,6 @@ include("config/conn.php");
             <?php } ?>
             <button type="submit">Filter</button>
     </form>
-    <!-- </div> -->
 </main>
 
     <?php include 'components/footer.php'; ?>

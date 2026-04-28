@@ -12,7 +12,11 @@ if(isset($_POST["simpan"])){
     $isi = mysqli_real_escape_string($con, $_POST["isi"]);
     $kategori = (int) $_POST["kategori"];
     $uploader = mysqli_real_escape_string($con, $_SESSION['username']);
-                                                                                            // biar ga kepangjangan
+
+    // Ambil user_id dari session username untuk relasi berita-user
+    $userRow = mysqli_fetch_assoc(mysqli_query($con, "select id from user where username='$uploader'"));
+    $userId = $userRow ? (int) $userRow['id'] : 0;
+                                                                                            // biar ga kepannjangan
     if (strlen($isi) > 250) {
         $error = "Maksimum 250 karakter.";
     } else {                                                                                //untuk gambar, gambar disimpen jadi binary blob di db.
@@ -38,10 +42,10 @@ if(isset($_POST["simpan"])){
             $fileNameSql = "'" . $fileName . "'";
             $fileTypeSql = "'" . $fileType . "'";
         }
-                                                                                            // simpan                                                      
+                                                                                            // simpan dengan user_id untuk relasi
         mysqli_query($con,"
-        insert into berita (judul, isi, kategori_id, uploader, tanggal, gambar, gambar_type, file_blob, file_name, file_type)
-        values('$judul', '$isi', $kategori, '$uploader', NOW(), $gambarSql, $gambarTypeSql, $fileSql, $fileNameSql, $fileTypeSql)
+        insert into berita (judul, isi, kategori_id, user_id, uploader, tanggal, gambar, gambar_type, file_blob, file_name, file_type)
+        values('$judul', '$isi', $kategori, $userId, '$uploader', NOW(), $gambarSql, $gambarTypeSql, $fileSql, $fileNameSql, $fileTypeSql)
         ");
         header("Location: upload.php");
         exit;
