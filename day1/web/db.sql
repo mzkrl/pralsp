@@ -5,7 +5,7 @@ CREATE Table  if NOT EXISTS user(
     username VARCHAR(50) UNIQUE,
     password VARCHAR(255),
     bio VARCHAR(255) DEFAULT null,
-    gambar BLOB DEFAULT NULL,
+    gambar mediumBLOB DEFAULT NULL,
     gambar_type VARCHAR(50)
 );
 
@@ -22,9 +22,9 @@ CREATE Table if NOT EXISTS berita (
     user_id INT,
     uploader VARCHAR(50),
     tanggal DATETIME,
-    gambar BLOB DEFAULT NULL,
+    gambar mediumBLOB DEFAULT NULL,
     gambar_type VARCHAR(50),
-    file_blob BLOB DEFAULT NULL,
+    file_blob mediumBLOB DEFAULT NULL,
     file_name VARCHAR(255),
     file_type VARCHAR(100),
     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
@@ -38,9 +38,9 @@ CREATE Table if NOT EXISTS komentar (
     username VARCHAR(50),
     isi VARCHAR(250),
     tanggal DATETIME,
-    gambar BLOB DEFAULT NULL,
+    gambar mediumBLOB DEFAULT NULL,
     gambar_type VARCHAR(50),
-    file_blob BLOB DEFAULT NULL,
+    file_blob mediumBLOB DEFAULT NULL,
     file_name VARCHAR(255),
     file_type VARCHAR(100),
     FOREIGN KEY (berita_id) REFERENCES berita(id) ON DELETE CASCADE,
