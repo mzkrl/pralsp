@@ -15,6 +15,7 @@
             { name: "Posting", path: "/user/posting.php" },
             { name: "Kelola Kategori", path: "/user/kategori.php" },
             { name: "Tambah Kategori", path: "/user/tambah_kategori.php" },
+            { name: "Register", path: "/auth/register.php" },
             { name: "Logout", path: "/auth/logout.php" }
         ];
 

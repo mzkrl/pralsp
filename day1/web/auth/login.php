@@ -1,3 +1,4 @@
+<?php include '../components/header.php'; ?>
 <head>
     <link rel="stylesheet" href="../assets/styles.css">
 </head>
@@ -7,3 +8,4 @@
     <input type="password" name="password" placeholder="password">
     <button type="submit">submit</button>
 </form>
+<?php include '../components/footer.php'; ?>

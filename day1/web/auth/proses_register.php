@@ -8,5 +8,5 @@ $password = mysqli_real_escape_string($con, md5($_POST['password']));
 $query = mysqli_query($con,"
     insert into user(username, password) values ('$username', '$password')
 ");
-header("Loaction: login.php");
+header("Location: login.php");
 ?>
